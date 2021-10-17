@@ -2,10 +2,11 @@
 class mobileMenu {
     constructor()
     {
-        
+        this.body = document.querySelector('body');
         this.btnHamburger = document.querySelector('#btnHamburger'); 
         this.Header = document.querySelector('.header'); 
         this.overlay = document.querySelector('.overlay');
+        this.fadeElems = document.querySelectorAll('.has-fade');
         this.event();
     }
 
@@ -18,16 +19,24 @@ class mobileMenu {
     {
         if(this.Header.classList.contains('open')) // close menu
         {
+            this.body.classList.remove('noscroll');
             this.Header.classList.remove('open');
-            this.overlay.classList.remove('fade-in');
-            this.overlay.classList.add('fade-out');
+            this.fadeElems.forEach(function(element){
+            element.classList.remove('fade-in');
+            element.classList.add('fade-out');
+            })
+            
         }
         else
-        {
+        {   
+            this.body.classList.add('noscroll');
             this.Header.classList.add('open'); // open menu
-            this.overlay.classList.remove('fade-out');
-            this.overlay.classList.add('fade-in');
+            this.fadeElems.forEach(function(element){
+            element.classList.remove('fade-out');
+            element.classList.add('fade-in');
 
+            });
+            
         }
     }
 }
