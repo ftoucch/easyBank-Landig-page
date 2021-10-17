@@ -1,44 +1,28 @@
+const btnHamburger = document.querySelector('#btnHamburger');
+const body = document.querySelector('body');
+const header = document.querySelector('.header');
+const overlay = document.querySelector('.overlay');
+const fadeElems = document.querySelectorAll('.has-fade');
 
-class mobileMenu {
-    constructor()
-    {
-        this.body = document.querySelector('body');
-        this.btnHamburger = document.querySelector('#btnHamburger'); 
-        this.Header = document.querySelector('.header'); 
-        this.overlay = document.querySelector('.overlay');
-        this.fadeElems = document.querySelectorAll('.has-fade');
-        this.event();
-    }
+btnHamburger.addEventListener('click', function(){
+  console.log('click hamburger');
 
-    event()
-    {
-        this.btnHamburger.addEventListener('click', this.OpenOverlay.bind(this));
-    }
+  if(header.classList.contains('open')){ // Close Hamburger Menu
+    body.classList.remove('noscroll');
+    header.classList.remove('open');    
+    fadeElems.forEach(function(element){
+      element.classList.remove('fade-in');
+      element.classList.add('fade-out');
+    });
+    
+  }
+  else { // Open Hamburger Menu
+    body.classList.add('noscroll');
+    header.classList.add('open');
+    fadeElems.forEach(function(element){
+      element.classList.remove('fade-out');
+      element.classList.add('fade-in');
+    });
 
-    OpenOverlay()
-    {
-        if(this.Header.classList.contains('open')) // close menu
-        {
-            this.body.classList.remove('noscroll');
-            this.Header.classList.remove('open');
-            this.fadeElems.forEach(function(element){
-            element.classList.remove('fade-in');
-            element.classList.add('fade-out');
-            })
-            
-        }
-        else
-        {   
-            this.body.classList.add('noscroll');
-            this.Header.classList.add('open'); // open menu
-            this.fadeElems.forEach(function(element){
-            element.classList.remove('fade-out');
-            element.classList.add('fade-in');
-
-            });
-            
-        }
-    }
-}
-
-var HamburgerAnimation = new mobileMenu();
+  }  
+});
